@@ -33,7 +33,7 @@
                 <a href="https://x.com/AmarThakuri8330?s=08" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
                 <a href="https://www.instagram.com/thakuri.19/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
             </div>
-          <a class="btn" href="./resume.pdf" download="resume.pdf">Download Resume</a>
+            <a href="/resume.pdf" download="resume.pdf" class="btn">Download resume</a>
         </div>
     </section>
 
@@ -86,7 +86,50 @@
     </section>
 
     <footer>
+        <form id="contact-form" class="contact-form">
+            <h2>Contact Me</h2>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+            
+            <button type="submit">Send</button>
+        </form>
+        
         <p>&copy; 2024 Amar Bahadur Malla. All rights reserved.</p>
     </footer>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+      (function() {
+        emailjs.init("W55HlzRJJvhTrGseT"); // Replace with your EmailJS user ID
+      })();
+
+      document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        const form = event.target;
+        const formData = new FormData(form);
+
+        // Convert form data to a JSON object
+        const data = {};
+        formData.forEach((value, key) => {
+          data[key] = value;
+        });
+
+        emailjs.send('service_a6c0f2u', 'template_yourtemplateid', data)
+          .then(function(response) {
+            alert('Your message has been sent successfully!');
+            form.reset(); // Clear the form
+          }, function(error) {
+            alert('Failed to send the message. Please try again.');
+            console.error('EmailJS Error:', error);
+          });
+      });
+    </script>
 </body>
 </html>
